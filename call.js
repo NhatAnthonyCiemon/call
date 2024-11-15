@@ -17,6 +17,9 @@ function init(userId) {
         host: "0.peerjs.com",
         port: 443,
         secure: true,
+        config: {
+            iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
+        },
     });
     console.log(userId);
     peer.on("open", () => {});
