@@ -65,8 +65,6 @@ function startCall(otherUserId) {
                 return;
             }
 
-            Android.onCallReady(otherUserId);
-
             call.on("stream", (remoteStream) => {
                 remoteVideo.srcObject = remoteStream;
 
