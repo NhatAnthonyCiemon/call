@@ -19,9 +19,7 @@ function init(userId) {
         secure: true,
     });
     console.log(userId);
-    peer.on("open", () => {
-        Android.onPeerConnected();
-    });
+    peer.on("open", () => {});
 
     listen();
 }
