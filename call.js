@@ -13,18 +13,37 @@ remoteVideo.onplaying = () => {
 
 let peer;
 function init(userId) {
-    peer = new Peer(userId, {
-        host: "0.peerjs.com",
-        port: 443,
-        secure: true,
-        config: {
-            iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
-        },
-    });
-    console.log(userId);
-    peer.on("open", () => {});
+    async function getIceServers() {
+        const response = await fetch(
+            "https://global.xirsys.net/_turn/MyFirstApp",
+            {
+                method: "PUT",
+                headers: {
+                    Authorization:
+                        "Basic " +
+                        btoa("nhat:67e43036-a35e-11ef-8fc0-0242ac150002"),
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+        const iceServers = await response.json();
+        return iceServers.v.iceServers; // Đây là danh sách các ICE servers
+    }
 
-    listen();
+    // Sử dụng các ICE servers từ Xirsys trong cấu hình WebRTC
+    getIceServers().then((iceServers) => {
+        peer = new Peer(userId, {
+            host: "0.peerjs.com",
+            port: 443,
+            secure: true,
+            config: {
+                iceServers: iceServers,
+            },
+        });
+        console.log(userId);
+        peer.on("open", () => {});
+        listen();
+    });
 }
 
 let localStream;
