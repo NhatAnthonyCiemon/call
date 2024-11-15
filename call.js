@@ -18,7 +18,7 @@ function init(userId) {
         port: 443,
         secure: true,
     });
-
+    console.log(userId);
     peer.on("open", () => {
         Android.onPeerConnected();
     });
@@ -51,6 +51,7 @@ function listen() {
 }
 
 function startCall(otherUserId) {
+    console.log(otherUserId);
     navigator.getUserMedia(
         {
             audio: true,
@@ -59,7 +60,7 @@ function startCall(otherUserId) {
         (stream) => {
             localVideo.srcObject = stream;
             localStream = stream;
-
+            console.log("call");
             const call = peer.call(otherUserId, stream);
             if (!call) {
                 Android.onCallError();
