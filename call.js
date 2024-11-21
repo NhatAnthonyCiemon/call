@@ -112,3 +112,6 @@ function toggleAudio(b) {
         localStream.getAudioTracks()[0].enabled = false;
     }
 }
+// display: grid;
+//             grid-template-columns: repeat(1, 1fr);
+//             grid-template-rows: repeat(1, 1fr);
