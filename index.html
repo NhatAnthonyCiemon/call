@@ -104,7 +104,7 @@
             async function getIceServers() {
                 const res = await fetch("https://call-server-part2.vercel.app/?vercelToolbarCode=cRLtHhVcEpRh5NQ")
                 const iceServers = await res.json();
-                return iceServers;
+                return iceServers.iceServers;
             }
 
             // Khởi tạo PeerJS sau khi lấy ICE servers
