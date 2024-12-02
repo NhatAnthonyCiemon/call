@@ -102,12 +102,9 @@
 
         function init(userId) {
             async function getIceServers() {
-
-                return [
-                    { urls: "stun:stun.l.google.com:19302" },
-                    { urls: "stun:stun1.l.google.com:19302" },
-                ]; // Dùng backup servers nếu xảy ra lỗi
-
+                const res = await fetch("https://call-server-part2.vercel.app/?vercelToolbarCode=cRLtHhVcEpRh5NQ")
+                const iceServers = await res.json();
+                return iceServers;
             }
 
             // Khởi tạo PeerJS sau khi lấy ICE servers
